@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { TrackList } from '../TrackList/TrackList'
 import './SearchResults.css'
 
 export class SearchResults extends Component {
@@ -7,6 +8,7 @@ export class SearchResults extends Component {
             <div className="SearchResults">
                 <h2>Results</h2>
                 {/* <!-- Add a TrackList component --> */}
+                <TrackList onAdd={this.props.onAdd} tracks={this.props.searchResults} isRemoval={false} />
             </div>
         )
     }
