@@ -1,44 +1,53 @@
-import React, { Component } from 'react'
-import "./Track.css"
+import React, { Component } from 'react';
+import './Track.css';
 
 export class Track extends Component {
+  constructor(props) {
+    super(props);
+    this.addTrack = this.addTrack.bind(this);
+    this.removeTrack = this.removeTrack.bind(this);
+  }
 
-    constructor(props) {
-        super(props)
-        this.addTrack = this.addTrack.bind(this)
-        this.removeTrack = this.removeTrack.bind(this)
+  renderAction() {
+    if (this.props.isRemoval) {
+      return (
+        <button onClick={this.removeTrack} className='Track-action'>
+          -
+        </button>
+      );
+    } else {
+      return (
+        <button onClick={this.addTrack} className='Track-action'>
+          +
+        </button>
+      );
     }
+  }
 
-    renderAction(isRemoval) {
-        let html
-        if(isRemoval) {
-            html = <button onClick={this.addTrack} className="Track-action">-</button>
-        } else if (!isRemoval) {
-            html = <button onClick={this.removeTrack} className="Track-action">+</button>
-        }
-        return html
-    }
+  addTrack() {
+    console.log('ADD::', this.props.track);
+    this.props.onAdd(this.props.track);
+  }
 
-    addTrack() {
-        //add track
-        return this.props.onAdd(this.props.track)
-    }
+  removeTrack() {
+    console.log('REMOVE::', this.props.track);
+    this.props.onRemove(this.props.track);
+  }
 
-    removeTrack() {
-        return this.props.onRemove(this.props.track)
-    }
-
-    render() {
-        return (
-            <div className="Track">
-                <div className="Track-information">
-                    <h3> {this.props.track.name} </h3>
-                    <p> {this.props.track.artist} | {this.props.track.album}</p>
-                </div>
-                {this.renderAction(this.props.isRemoval)}
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div className='Track'>
+        <div className='Track-information'>
+          <h3> {this.props.track.name} </h3>
+          <p>
+            {' '}
+            {this.props.track.artist} | {this.props.track.album}
+          </p>
+        </div>
+        {this.renderAction()}
+      </div>
+    );
+  }
 }
 
-export default Track
+export default Track;
