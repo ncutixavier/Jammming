@@ -11,7 +11,7 @@ export class App extends Component {
     this.state = {
       searchResults: [
         {
-          id: 1,
+          id: 4,
           name: 'Eva',
           artist: 'Davis D',
           album: 'Afro Killer',
@@ -45,6 +45,7 @@ export class App extends Component {
     if (!tracks.find((trackIndex) => trackIndex.id === track.id)) {
       tracks.push(track);
       this.setState({ playlistTracks: tracks });
+      console.log(this.state.playlistTracks)
     }
   }
 
