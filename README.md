@@ -12,5 +12,6 @@
 ### Remote testing
 
 - Open [Production Link](https://jammming-ncuti.netlify.app/)
+- Write any song in search input, then click on search button
 - Click on `+` icon to add song in playlist
 - Click on `-` icon to remove song in playlist
