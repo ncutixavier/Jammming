@@ -9,29 +9,9 @@ export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchResults: [
-        {
-          id: 4,
-          name: 'Eva',
-          artist: 'Davis D',
-          album: 'Afro Killer',
-        },
-      ],
+      searchResults: [],
       playlistName: 'New Playlist',
-      playlistTracks: [
-        {
-          id: 1,
-          name: 'Eva',
-          artist: 'Davis D',
-          album: 'Afro Killer',
-        },
-        {
-          id: 2,
-          name: 'Find you',
-          artist: 'Jonas',
-          album: 'Find you',
-        },
-      ],
+      playlistTracks: [],
     };
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
@@ -45,7 +25,6 @@ export class App extends Component {
     if (!tracks.find((trackIndex) => trackIndex.id === track.id)) {
       tracks.push(track);
       this.setState({ playlistTracks: tracks });
-      console.log(this.state.playlistTracks)
     }
   }
 
@@ -68,15 +47,14 @@ export class App extends Component {
           playlistName: 'New Playlist',
           playlistTracks: [],
         });
+        document.getElementById('Playlist-name').value = this.state.playlistName
       });
     }
   }
 
   search(term) {
-    console.log(term);
     Spotify.search(term).then((result) => {
       this.setState({ searchResults: result });
-      console.log('SEARCH-RES::', result);
     });
   }
 

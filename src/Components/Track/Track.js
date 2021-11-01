@@ -25,12 +25,10 @@ export class Track extends Component {
   }
 
   addTrack() {
-    console.log('ADD::', this.props.track);
     this.props.onAdd(this.props.track);
   }
 
   removeTrack() {
-    console.log('REMOVE::', this.props.track);
     this.props.onRemove(this.props.track);
   }
 

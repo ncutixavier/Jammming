@@ -1,10 +1,10 @@
 let accessToken;
 let redirect_uri;
-const clientId = 'c9facf4799e2437eadc26e8cc1128aa9';
+const clientId = '5a02a65751fd429285139696ea43b55b';
 const api = 'https://api.spotify.com'
 
 if (process.env.NODE_ENV === 'development') {
-  redirect_uri = 'http://localhost:3000/';
+  redirect_uri = 'http://localhost:3000/callback/';
 } else {
   redirect_uri = 'https://jammming-ncuti.netlify.app/';
 }
@@ -62,7 +62,6 @@ const Spotify = {
           return res.json();
         })
         .then((jsonResponse) => {
-          console.log(jsonResponse);
           userID = jsonResponse.id;
 
           return fetch(`${api}/v1/users/${userID}/playlists`, {

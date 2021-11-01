@@ -15,7 +15,7 @@ export class Playlist extends Component {
   }
 
   handleNameChange(e) {
-    this.propson.onNameChange(e.target.value);
+    this.props.onNameChange(e.target.value);
   }
 
   render() {
