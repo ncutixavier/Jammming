@@ -6,7 +6,7 @@ const api = 'https://api.spotify.com'
 if (process.env.NODE_ENV === 'development') {
   redirect_uri = 'http://localhost:3000/callback/';
 } else {
-  redirect_uri = 'https://jammming-ncuti.netlify.app/';
+  redirect_uri = 'https://jammming-ncuti.netlify.app/callback/';
 }
 
 const Spotify = {
