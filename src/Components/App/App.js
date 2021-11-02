@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import { SearchResults } from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
 import SearchBar from '../SearchBar/SearchBar';
-import Spotify from '../../utils/Spotify';
+import Deezer from '../../utils/Deezer';
 import './App.css';
+
+let api;
+if (process.env.NODE_ENV === 'development') {
+  api = 'http://localhost:8005/api/v1/deezer';
+} else {
+  api = 'https://leave-app-sys.herokuapp.com/api/v1/deezer';
+}
 
 export class App extends Component {
   constructor(props) {
@@ -40,22 +47,45 @@ export class App extends Component {
 
   savePlaylist() {
     let tracks = this.state.playlistTracks;
-    if (tracks.length && this.state.playlistName) {
-      let trackURIs = tracks.map((track) => track.uri);
-      Spotify.savePlaylist(this.state.playlistName, trackURIs).then(() => {
+    let token = localStorage.getItem('token');
+    let user_id = localStorage.getItem('user_id');
+    if (tracks.length && this.state.playlistName && token && user_id) {
+      let trackIDs = tracks.map((track) => track.id);
+      Deezer.savePlaylist(
+        this.state.playlistName,
+        trackIDs,
+        token,
+        user_id
+      ).then(() => {
         this.setState({
           playlistName: 'New Playlist',
           playlistTracks: [],
         });
-        document.getElementById('Playlist-name').value = this.state.playlistName
+        document.getElementById('Playlist-name').value =
+          this.state.playlistName;
       });
     }
   }
 
   search(term) {
-    Spotify.search(term).then((result) => {
+    Deezer.search(term).then((result) => {
       this.setState({ searchResults: result });
     });
+  }
+
+  componentDidMount() {
+    const newAccessToken = window.location.href.match(/token=([^&]*)/);
+    if (newAccessToken) {
+      localStorage.setItem('token', newAccessToken[1]);
+      fetch(`${api}/profile?token=${newAccessToken[1]}`)
+        .then((response) => response.json())
+        .then((json) => {
+          localStorage.setItem('user_id', json.id);
+        });
+    } else {
+      let url = `${api}/auth`;
+      window.location.href = url;
+    }
   }
 
   render() {
