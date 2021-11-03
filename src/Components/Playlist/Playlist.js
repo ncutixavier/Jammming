@@ -33,7 +33,7 @@ export class Playlist extends Component {
           onRemove={this.props.onRemove}
         />
         <button onClick={this.props.onSave} className='Playlist-save'>
-          SAVE TO SPOTIFY
+          SAVE TO DEEZER
         </button>
       </div>
     );
