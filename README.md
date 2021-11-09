@@ -1,4 +1,4 @@
-# Jammming
+# Jammming using Deezer API
 
 ### Manually testing
 
