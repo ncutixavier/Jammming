@@ -9,7 +9,7 @@ let api;
 if (process.env.NODE_ENV === 'development') {
   api = 'http://localhost:8005/api/v1/deezer';
 } else {
-  api = 'https://leave-app-sys.herokuapp.com/api/v1/deezer';
+  api = 'https://leave-backend.onrender.com/api/v1/deezer';
 }
 
 export class App extends Component {
